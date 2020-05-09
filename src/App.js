@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Users from './components/Users.js'
+import Form from './components/Form'
 import './App.css';
 
 class App extends Component {
@@ -8,7 +9,10 @@ class App extends Component {
     users: []
   }
 
-  
+  handleAdd = (event, formInputs) => {
+    event.preventDefault()
+    console.log(formInputs)
+  }
 
   getUsers = () => {
     fetch('/users')
@@ -24,6 +28,7 @@ class App extends Component {
     return (
       <div className="App">
         <Users users={this.state.users} />
+        <Form handleSubmit={this.handleAdd}/>
       </div>
     );
   }
