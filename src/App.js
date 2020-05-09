@@ -4,20 +4,26 @@ import './App.css';
 
 class App extends Component {
 
-  componentDidMount(){
-    this.getData()
+  state = {
+    users: []
   }
 
-  getData = () => {
-    fetch('/users/1')
+  
+
+  getUsers = () => {
+    fetch('/users')
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(json => this.setState({users: json}))
+  }
+
+  componentDidMount(){
+    this.getUsers()
   }
 
   render() {
     return (
       <div className="App">
-        <Users />
+        <Users users={this.state.users} />
       </div>
     );
   }
