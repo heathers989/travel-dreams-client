@@ -4,36 +4,28 @@ import Input from "./Input.js";
 class Form extends React.Component {
   state = {
     name: "",
-    interests: ""
+    interests: "",
+    country: "",
   };
 
 
   handleChange = (event) => {
     this.setState({ [event.target.id]: event.target.value });
+    console.log(this.state)
   };
 
   handleSubmit = (event) => {
-    event.preventDefault()
-    const user = {
-      name: this.state.name,
-      interests: this.state.interests,   
-    }
-    if (this.props.user) user.id = this.props.user.id
-    this.props.handleSubmit(
-      event,
-      user
-    )
+   event.preventDefault()
+   const userinfo = {
+    name: this.state.name,
+    interests: this.state.interests,
+    country: this.state.country
+  }
+  console.log(userinfo)
+   this.props.handleSubmit(event, userinfo)
   }
 
-  componentDidMount() {
-    if (this.props.user) {
-      const { name, interests } = this.props.user;
-      this.setState({
-        name: name || "",
-        interests: interests || ""
-      });
-    }
-  }
+  
 
   // handleUpdate = (event, formInputs) => {
   //   event.preventDefault()
@@ -46,9 +38,9 @@ class Form extends React.Component {
   //    'Content-Type': 'application/json'
   //  }
   // })
-  //  .then(updatedNotice => {
+  //  .then(updatedUser => {
   //    // be naughty
-  //    this.getNotices()
+  //    this.getUsers()
   //  })
   //  .catch(error => console.log(error))
   // }
@@ -72,15 +64,15 @@ class Form extends React.Component {
           value={this.state.interests}
           id={"interests"}
         />
-        {/* <Input
+        <Input
           handleChange={this.handleChange}
-          name={"phone"}
-          placeholder={"Notice Phone"}
+          name={"country"}
+          placeholder={"Country"}
           type={"text"}
-          value={this.state.phone}
-          id={"phone"}
-        /> */}
-        <input type="submit" value={this.props.user ? "update this user": "add a user"} />
+          value={this.state.country}
+          id={"country"}
+        />
+        <input type="submit" value="add a user"/>
       </form>
     );
   }

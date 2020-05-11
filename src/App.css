@@ -1,13 +1,48 @@
+body {
+  background-image: url('https://wallpapersite.com/images/pages/pic_h/1028.jpg');
+  color: midnightblue;
+  font-family: 'Indie Flower', cursive;
+  font-size: x-large;
+}
+
 .App {
   text-align: center;
 }
 
 .userinfo {
   text-align: left;
-  border: 1px solid green;
+  /* border: 1px solid green; */
   max-width: max-content;
 }
 
-tr {
-  outline: 1px solid blue;
+th {
+  width: 200px;
+}
+
+p {
+  margin: 0px;
+}
+
+table {
+  margin-bottom: 20px;
+  
+}
+
+#root {
+  background-color: rgba(248, 244, 244, 0.70);
+  padding-bottom: 200px;
+  padding-top: 50px;
+}
+
+.details {
+
+position: fixed;
+right: 0;
+top: 0;
+width: 200px;
+
+}
+
+h4, h6 {
+  margin: 0px;
 }
