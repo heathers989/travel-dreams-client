@@ -21,12 +21,27 @@ class Form extends React.Component {
     interests: this.state.interests,
     country: this.state.country
   }
+  if (this.props.user) {userinfo.id = this.props.user.id}
+  else {console.log("no user here")}
+
    this.props.handleSubmit(event, userinfo)
    this.setState({name: '', interests: '', country: ''})
   }
 
+  componentDidMount() {
+    if (this.props.user) {
+      const { name, interests, id } = this.props.user;
+      this.setState({
+        name: name || "",
+        interests: interests || "",
+        id: id || "",
+      });
+    }
+  }
+
   
 
+  // DON"T NEED THIS
   // handleUpdate = (event, formInputs) => {
   //   event.preventDefault()
   //   console.log('in it to win it')

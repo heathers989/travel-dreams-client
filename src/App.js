@@ -90,16 +90,33 @@ class App extends Component {
     err => console.log(err))
   }
 
+  handleUpdate = (event, formInputs) => {
+    event.preventDefault()
+    console.log('in it to win it')
+    fetch(`http://localhost:3000/users/${formInputs.id}`, {
+      body: JSON.stringify(formInputs),
+      method: 'PUT',
+   headers: {
+     'Accept': 'application/json, text/plain, */*',
+     'Content-Type': 'application/json'
+   }
+  })
+   .then(updatedUser => {
+     // go wild
+     this.getUsers()
+   })
+   .catch(error => console.log(error))
+  }
 
 
   render() {
     return (
       <div className="App">
         <h1>Where to next?</h1>
-         <Form handleSubmit={this.handleAdd}/>
+         <Form handleSubmit={this.handleAdd} />
          <Users getUser={this.getUser}
          users={this.state.users}/>
-         {this.state.getUserActive ? <Show handleDelete={this.handleDelete} user={this.state.user}/> : null}
+         {this.state.getUserActive ? <Show handleUpdate={this.handleUpdate} handleDelete={this.handleDelete} user={this.state.user}/> : null}
        
       </div>
     );
