@@ -10,7 +10,7 @@ function Users(props) {
 
         <div className="userinfo">
     {users.map(user => (
-    <div key={user.id} onMouseOver={() => getUser(user)}>
+    <div className="oneuser" key={user.id} onMouseOver={() => getUser(user)}>
         <div>Name: {user.name}</div>
         <div>Interests: {user.interests}</div>
 
@@ -32,6 +32,7 @@ function Users(props) {
 </div>
         
     ))}
+    <br/>
         </div>
         
       </>

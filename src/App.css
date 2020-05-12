@@ -13,6 +13,10 @@ body {
   text-align: left;
   /* border: 1px solid green; */
   max-width: max-content;
+  
+}
+
+.oneuser {
   background-color: rgba(248, 244, 244, 0.60);
 }
 
