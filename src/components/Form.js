@@ -87,7 +87,7 @@ class Form extends React.Component {
           value={this.state.country}
           id={"country"}
         />
-        <input type="submit" value="Share your wanderlust"/>
+        <input type="submit" value={this.props.user ? "update" : "spread the wanderlust"}/>
       </form>
     );
   }

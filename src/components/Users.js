@@ -11,7 +11,7 @@ function Users(props) {
         <div className="userinfo">
          
     {users.map(user => (
-    <div className="oneuser" key={user.id} onMouseOver={() => getUser(user)}>
+    <div className="oneuser" key={user.id} onClick={() => getUser(user)}><button>Click for more information</button>
         <div>Name: {user.name}</div>
         <div>Interests: {user.interests}</div>
 

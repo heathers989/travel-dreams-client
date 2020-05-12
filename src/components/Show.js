@@ -19,7 +19,7 @@ class Show extends React.Component {
       }
     
   render () {
-      const {user, handleDelete } = this.props
+      const {user, handleDelete, getUser} = this.props
     return (
       <>
        {this.state.formVisible
@@ -32,6 +32,7 @@ class Show extends React.Component {
          <h6> Interests: { user.interests} </h6>
          <button onClick={() => handleDelete(user)}>Delete</button>
          <button onClick={this.toggleForm}>Edit</button>
+         <button onClick={() => getUser()}>Close</button>
        </div>}
       </>
     )

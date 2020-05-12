@@ -23,7 +23,7 @@ class App extends Component {
   getUser = (user) => {
 
     this.setState({user, 
-      getUserActive: true
+      getUserActive: !this.state.getUserActive
       // , getEditUserActive: false
     }) 
 
@@ -116,7 +116,7 @@ class App extends Component {
          <Form handleSubmit={this.handleAdd} />
          <Users getUser={this.getUser}
          users={this.state.users}/>
-         {this.state.getUserActive ? <Show handleUpdate={this.handleUpdate} handleDelete={this.handleDelete} user={this.state.user}/> : null}
+         {this.state.getUserActive ? <Show getUser={this.getUser} handleUpdate={this.handleUpdate} handleDelete={this.handleDelete} user={this.state.user}/> : null}
        
       </div>
     );
