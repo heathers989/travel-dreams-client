@@ -55,7 +55,7 @@ class App extends Component {
       }
      }).then(location => location.json())
      .then(jsonedLocation => {jsonedUser.locations = [jsonedLocation]; console.log(jsonedUser)})
-      this.getUsers()
+     this.getUsers()
    })
   }
  
