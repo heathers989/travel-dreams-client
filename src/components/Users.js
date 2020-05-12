@@ -4,11 +4,12 @@ import React from 'react';
 function Users(props) {
   let {users, getUser} = props;
   // users = props;
- 
+  // getUsers()
     return (
       <>
 
         <div className="userinfo">
+         
     {users.map(user => (
     <div className="oneuser" key={user.id} onMouseOver={() => getUser(user)}>
         <div>Name: {user.name}</div>

@@ -4,6 +4,13 @@ import Form from './components/Form'
 import './App.css';
 import Show from './components/Show.js'
 
+// fetch("http://localhost:3000/locations")
+//   .then(data => {
+//     return data.json()},
+//     err => console.log(err))
+//   .then(parsedData => console.log(parsedData),
+//    err => console.log(err))
+
 class App extends Component {
 
   state = {
@@ -48,9 +55,7 @@ class App extends Component {
       }
      }).then(location => location.json())
      .then(jsonedLocation => {jsonedUser.locations = [jsonedLocation]; console.log(jsonedUser)})
-     this.setState({
-       users: [jsonedUser, ...this.state.users]
-     })
+      this.getUsers()
    })
   }
  
@@ -81,7 +86,7 @@ class App extends Component {
       return response.json()},
       err => console.log(err))
     .then(json => this.setState({users: json}),
-    // console.log("users after get:" + this.state.users),
+    console.log("users after get:" + this.state.users),
     err => console.log(err))
   }
 

@@ -22,6 +22,7 @@ class Form extends React.Component {
     country: this.state.country
   }
    this.props.handleSubmit(event, userinfo)
+   this.setState({name: '', interests: '', country: ''})
   }
 
   
@@ -71,7 +72,7 @@ class Form extends React.Component {
           value={this.state.country}
           id={"country"}
         />
-        <input type="submit" value="add a user"/>
+        <input type="submit" value="Share your wanderlust"/>
       </form>
     );
   }
