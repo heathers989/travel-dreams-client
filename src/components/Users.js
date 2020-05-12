@@ -7,7 +7,6 @@ function Users(props) {
  
     return (
       <>
-        <h1>Where to next?</h1>
 
         <div className="userinfo">
     {users.map(user => (

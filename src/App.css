@@ -13,6 +13,7 @@ body {
   text-align: left;
   /* border: 1px solid green; */
   max-width: max-content;
+  background-color: rgba(248, 244, 244, 0.60);
 }
 
 th {
@@ -28,19 +29,19 @@ table {
   
 }
 
-#root {
-  background-color: rgba(248, 244, 244, 0.70);
+/* #root {
+  
   padding-bottom: 200px;
   padding-top: 50px;
-}
+} */
 
 .details {
 
 position: fixed;
-right: 0;
-top: 0;
+left: 70%;
+top: 260px;
 width: 200px;
-
+background-color: rgba(248, 244, 244, 0.60);
 }
 
 h4, h6 {

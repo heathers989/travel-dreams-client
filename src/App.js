@@ -4,13 +4,6 @@ import Form from './components/Form'
 import './App.css';
 import Show from './components/Show.js'
 
-fetch("http://localhost:3000/users")
-  .then(data => {
-    return data.json()},
-    err => console.log(err))
-  .then(parsedData => console.log(parsedData),
-   err => console.log(err))
-
 class App extends Component {
 
   state = {
@@ -19,6 +12,7 @@ class App extends Component {
     setShow: false
   }
 
+  //for show route
   getUser = (user) => {
 
     this.setState({user, 
@@ -42,6 +36,8 @@ class App extends Component {
    .then((jsonedUser) => {
      console.log(jsonedUser)
      let jsonedUserId = jsonedUser.id
+     console.log("id for user being created " + jsonedUserId)
+    //  event.persist()
      fetch(`http://localhost:3000/users/${jsonedUserId}/locations`, {
       body: JSON.stringify({country: userinfo.country
       }),
@@ -51,12 +47,29 @@ class App extends Component {
         'Content-Type': 'application/json'
       }
      }).then(location => location.json())
+     .then(jsonedLocation => {jsonedUser.locations = [jsonedLocation]; console.log(jsonedUser)})
      this.setState({
        users: [jsonedUser, ...this.state.users]
      })
    })
   }
  
+  handleDelete = (deletedUser) => {
+    fetch(`http://localhost:3000/users/${deletedUser.id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((json) => {
+        const users = this.state.users.filter(
+          (user) => user.id !== deletedUser.id
+        );
+        this.setState({ users });
+      })
+      .catch((error) => console.log(error));
+  };
  
   componentDidMount(){
     this.getUsers()
@@ -68,7 +81,7 @@ class App extends Component {
       return response.json()},
       err => console.log(err))
     .then(json => this.setState({users: json}),
-    console.log("users after get:" + this.state.users),
+    // console.log("users after get:" + this.state.users),
     err => console.log(err))
   }
 
@@ -77,10 +90,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>Where to next?</h1>
+         <Form handleSubmit={this.handleAdd}/>
          <Users getUser={this.getUser}
          users={this.state.users}/>
-         {this.state.getUserActive ? <Show user={this.state.user}/> : null}
-        <Form handleSubmit={this.handleAdd}/>
+         {this.state.getUserActive ? <Show handleDelete={this.handleDelete} user={this.state.user}/> : null}
+       
       </div>
     );
   }

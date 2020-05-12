@@ -5,7 +5,7 @@ class Form extends React.Component {
   state = {
     name: "",
     interests: "",
-    country: "",
+    country: ""
   };
 
 
@@ -21,7 +21,6 @@ class Form extends React.Component {
     interests: this.state.interests,
     country: this.state.country
   }
-  console.log(userinfo)
    this.props.handleSubmit(event, userinfo)
   }
 
