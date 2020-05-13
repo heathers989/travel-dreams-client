@@ -4,12 +4,21 @@ import Form from './components/Form'
 import './App.css';
 import Show from './components/Show.js'
 
-// fetch("http://localhost:3000/locations")
+// fetch("${baseURL}locations")
 //   .then(data => {
 //     return data.json()},
 //     err => console.log(err))
 //   .then(parsedData => console.log(parsedData),
 //    err => console.log(err))
+
+let baseURL = process.env.REACT_APP_BASEURL
+
+
+if (process.env.NODE_ENV === 'development') {
+  baseURL = 'http://localhost:3000'
+} else {
+  baseURL = 'https://traveldreams-api.herokuapp.com/'
+}
 
 class App extends Component {
 
@@ -32,7 +41,7 @@ class App extends Component {
 
   handleAdd = (event, userinfo) => {
    event.preventDefault()
-   fetch("http://localhost:3000/users", {
+   fetch(`${baseURL}users`, {
      body: JSON.stringify({name: userinfo.name, hometown: userinfo.hometown, interests: userinfo.interests}),
      method: "POST",
      headers: {
@@ -46,7 +55,7 @@ class App extends Component {
      let jsonedUserId = jsonedUser.id
      console.log("id for user being created " + jsonedUserId)
     //  event.persist()
-     fetch(`http://localhost:3000/users/${jsonedUserId}/locations`, {
+     fetch(`${baseURL}users/${jsonedUserId}/locations`, {
       body: JSON.stringify({country: userinfo.country, city: userinfo.city, landmarks: userinfo.landmarks, season: userinfo.season, image: userinfo.image
       }),
       method: 'POST',
@@ -65,7 +74,7 @@ class App extends Component {
     event.preventDefault()
     console.log("user id for location being created: " + userId)
    //  event.persist()
-    fetch(`http://localhost:3000/users/${userId}/locations`, {
+    fetch(`${baseURL}users/${userId}/locations`, {
      body: JSON.stringify({country: locationInfo.country, city: locationInfo.city, landmarks: locationInfo.landmarks, season: locationInfo.season, image: locationInfo.image
      }),
      method: 'POST',
@@ -86,7 +95,7 @@ class App extends Component {
   }
  
   handleDelete = (deletedUser) => {
-    fetch(`http://localhost:3000/users/${deletedUser.id}`, {
+    fetch(`${baseURL}users/${deletedUser.id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -107,7 +116,7 @@ class App extends Component {
   }
 
   getUsers = () => {
-    fetch('http://localhost:3000/users')
+    fetch(`${baseURL}users`)
     .then(response => { 
       return response.json()},
       err => console.log(err))
@@ -119,7 +128,7 @@ class App extends Component {
   handleUpdate = (event, formInputs) => {
     event.preventDefault()
     console.log('in it to win it')
-    fetch(`http://localhost:3000/users/${formInputs.id}`, {
+    fetch(`${baseURL}users/${formInputs.id}`, {
       body: JSON.stringify(formInputs),
       method: 'PUT',
       headers: {
