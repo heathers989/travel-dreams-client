@@ -16,7 +16,8 @@ class App extends Component {
   state = {
     users: [],
     show: false,
-    setShow: false
+    setShow: false,
+    
   }
 
   //for show route
@@ -55,8 +56,33 @@ class App extends Component {
       }
      }).then(location => location.json())
      .then(jsonedLocation => {jsonedUser.locations = [jsonedLocation]; console.log(jsonedUser)})
+    //  this.prepareUsers()
      this.getUsers()
    })
+  }
+
+  handleAddLocation = (event, userId, locationInfo) => {
+    event.preventDefault()
+    console.log("user id for location being created: " + userId)
+   //  event.persist()
+    fetch(`http://localhost:3000/users/${userId}/locations`, {
+     body: JSON.stringify({country: locationInfo.country, city: locationInfo.city, landmarks: locationInfo.landmarks, season: locationInfo.season, image: locationInfo.image
+     }),
+     method: 'POST',
+     headers: {
+       'Accept': 'application/json, text/plain, */*',
+       'Content-Type': 'application/json'
+     }
+    })
+    .then(location => location.json())
+    this.prepareUsers()
+    this.getUsers()
+    // .then(jsonedLocation => {jsonedUser.locations = [jsonedLocation]; console.log(jsonedUser)})
+  }
+
+  prepareUsers = () => {
+    console.log("give users or locations time to add")
+    this.getUsers()
   }
  
   handleDelete = (deletedUser) => {
@@ -86,7 +112,7 @@ class App extends Component {
       return response.json()},
       err => console.log(err))
     .then(json => this.setState({users: json}),
-    // console.log("users after get:" + this.state.users),
+    console.log("get users is running"),
     err => console.log(err))
   }
 
@@ -114,10 +140,11 @@ class App extends Component {
       <div className="App">
         <h1>Where To Next?</h1>
         <p>Fill out the form with your information and where you'd like to travel to!</p>
-         <Form handleSubmit={this.handleAdd} />
+         <Form handleSubmit={this.handleAdd}/>
          <br/>
          <Users users={this.state.users} getUser={this.getUser}/>
-         {this.state.getUserActive ? <Show getUser={this.getUser} handleUpdate={this.handleUpdate} handleDelete={this.handleDelete} user={this.state.user}/> : null}
+
+         {this.state.getUserActive ? <Show getUser={this.getUser} handleAddLocation={this.handleAddLocation} handleUpdate={this.handleUpdate} handleDelete={this.handleDelete} user={this.state.user}/> : null}
        
       </div>
     );

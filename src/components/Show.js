@@ -1,15 +1,22 @@
 import React from 'react'
 import Form from "./Form"
+import Lform from './Lform'
 
 class Show extends React.Component {
 
     state = {
-        formVisible: false
+        formVisible: false,
+        locationForm: false
     }
 
     toggleForm = () => {
-        console.log("toggling form")
+        console.log("toggling edit form")
         this.setState({formVisible: !this.state.formVisible})
+      }
+
+      toggleLocationForm = () => {
+        console.log("toggling Location form")
+        this.setState({locationForm: !this.state.locationForm})
       }
 
       handleUpdate = (event, user) => {
@@ -19,12 +26,12 @@ class Show extends React.Component {
       }
     
   render () {
-      const {user, handleDelete, getUser} = this.props
+      const {user, handleDelete, getUser, handleAddLocation} = this.props
     return (
       <>
+
        {this.state.formVisible
         ? <Form user={user} handleSubmit={this.handleUpdate}/>
-
         :
         <div className="details">
          <h4> Name: { user.name } </h4>
@@ -33,7 +40,11 @@ class Show extends React.Component {
          <button onClick={() => handleDelete(user)}>Delete</button>
          <button onClick={this.toggleForm}>Edit</button>
          <button onClick={() => getUser()}>Close</button>
+         <button onClick={this.toggleLocationForm}>Add New Location</button>
        </div>}
+
+       
+         {this.state.locationForm ? <Lform user={user} handleAddLocation={handleAddLocation}/>: null}
       </>
     )
   }

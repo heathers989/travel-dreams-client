@@ -104,7 +104,7 @@ class Form extends React.Component {
          <Input
           handleChange={this.handleChange}
           name={"season"}
-          placeholder={"season to visit"}
+          placeholder={"Season to visit"}
           type={"text"}
           value={this.state.season}
           id={"season"}
