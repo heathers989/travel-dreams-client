@@ -32,7 +32,7 @@ class App extends Component {
   handleAdd = (event, userinfo) => {
    event.preventDefault()
    fetch("http://localhost:3000/users", {
-     body: JSON.stringify({name: userinfo.name, interests: userinfo.interests}),
+     body: JSON.stringify({name: userinfo.name, hometown: userinfo.hometown, interests: userinfo.interests}),
      method: "POST",
      headers: {
        'Accept': "application/json, text/plain, */*",
@@ -46,7 +46,7 @@ class App extends Component {
      console.log("id for user being created " + jsonedUserId)
     //  event.persist()
      fetch(`http://localhost:3000/users/${jsonedUserId}/locations`, {
-      body: JSON.stringify({country: userinfo.country
+      body: JSON.stringify({country: userinfo.country, city: userinfo.city, landmarks: userinfo.landmarks, season: userinfo.season, image: userinfo.image
       }),
       method: 'POST',
       headers: {
@@ -86,7 +86,7 @@ class App extends Component {
       return response.json()},
       err => console.log(err))
     .then(json => this.setState({users: json}),
-    console.log("users after get:" + this.state.users),
+    // console.log("users after get:" + this.state.users),
     err => console.log(err))
   }
 
@@ -96,7 +96,7 @@ class App extends Component {
     fetch(`http://localhost:3000/users/${formInputs.id}`, {
       body: JSON.stringify(formInputs),
       method: 'PUT',
-   headers: {
+      headers: {
      'Accept': 'application/json, text/plain, */*',
      'Content-Type': 'application/json'
    }
@@ -112,10 +112,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Where to next?</h1>
+        <h1>Where To Next?</h1>
+        <p>Fill out the form with your information and where you'd like to travel to!</p>
          <Form handleSubmit={this.handleAdd} />
-         <Users getUser={this.getUser}
-         users={this.state.users}/>
+         <br/>
+         <Users users={this.state.users} getUser={this.getUser}/>
          {this.state.getUserActive ? <Show getUser={this.getUser} handleUpdate={this.handleUpdate} handleDelete={this.handleDelete} user={this.state.user}/> : null}
        
       </div>

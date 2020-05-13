@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+}
+
+.userinfo {
+  text-align: left;
+  /* border: 1px solid green; */
+  max-width: max-content;
+}
+
+th {
+  width: 200px;
+}
+
+tr {
+  outline: 1px solid blue;
+}
+
+td {
+  outline: 1px solid red;
+}
+
+p {
+  margin: 0px;
+}
+
+table {
+  margin-bottom: 20px;
+  outline: 1px solid green;
+}
